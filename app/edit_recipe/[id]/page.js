@@ -96,7 +96,7 @@ const EditRecipe = ({ params }) => {
   }, [id]);
 
   if (!id) {
-    return <div>Loading...</div>; // You might want to replace this with a loading spinner
+    return <div>Loading...</div>; 
   }
   if (loading) {
     return <div>Loading...</div>;
