@@ -98,7 +98,8 @@ const My_Recipe = () => {
               <p>Description : {recipe.description}</p>
               <p>Ingredients : {recipe.ingredients}</p>
               <p>Instructions: {recipe.instructions}</p>
-              <button onClick={() => handleEdit(recipe.id)}>Edit</button>
+              {/* <button onClick={() => handleEdit(recipe.id)}>Edit</button> */}
+              <Link href={`/edit_recipe/${recipe.id}`}>Edit</Link>
               <button onClick={() => handleDelete(recipe.id)} className="ml-2">Delete</button>
             </div>
           ))}
