@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth";
 import Link from "next/link";
 
-const My_Recipe = () => {
+const My_Event = () => {
   const { user } = useContext(AuthContext);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -106,4 +106,4 @@ const My_Recipe = () => {
   );
 };
 
-export default My_Recipe;
+export default My_Event;
