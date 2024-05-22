@@ -11,8 +11,10 @@ const My_Recipe = () => {
 
   useEffect(() => {
     const fetchUserRecipes = async () => {
-      const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-      const storedUser = typeof window !== 'undefined' ? localStorage.getItem('user_id') : null;
+      const token =
+        typeof window !== "undefined" ? localStorage.getItem("token") : null;
+      const storedUser =
+        typeof window !== "undefined" ? localStorage.getItem("user_id") : null;
 
       // const storedUser = localStorage.getItem("user_id");
       // const token = localStorage.getItem("token");
@@ -56,9 +58,9 @@ const My_Recipe = () => {
     return <div>You need to log in to view this page.</div>;
   }
 
-
   const handleDelete = async (recipeId) => {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
     // const token = localStorage.getItem("token");
     try {
@@ -76,7 +78,9 @@ const My_Recipe = () => {
       if (!response.ok) {
         throw new Error("Failed to delete recipe");
       }
-      setRecipes((prevRecipes) => prevRecipes.filter((recipe) => recipe.id !== recipeId));
+      setRecipes((prevRecipes) =>
+        prevRecipes.filter((recipe) => recipe.id !== recipeId)
+      );
       alert("Recipe deleted successfully");
     } catch (error) {
       console.error("An error occurred:", error);
@@ -95,8 +99,17 @@ const My_Recipe = () => {
               <p>Description : {recipe.description}</p>
               <p>Ingredients : {recipe.ingredients}</p>
               <p>Instructions: {recipe.instructions}</p>
-              <Link href={`/my_recipe/${recipe.id}`}>Edit</Link>
-              <button onClick={() => handleDelete(recipe.id)} className="ml-2">Delete</button>
+              <Link
+                href={{
+                  pathname: "/edit_recipe",
+                  query: { recipe: JSON.stringify(recipe) },
+                }}
+              >
+                Edit
+              </Link>
+              <button onClick={() => handleDelete(recipe.id)} className="ml-2">
+                Delete
+              </button>
             </div>
           ))}
         </div>

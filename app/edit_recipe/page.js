@@ -1,22 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-const dt_recipe = ({ params }) => {
-  const { dt_recipe } = params;
-  const id = dt_recipe;
-  const [recipe, setRecipe] = useState(null);
-  const [loading, setLoading] = useState(true);
+const EditRecipe = ({ searchParams }) => {
+  const recipe = JSON.parse(searchParams.recipe);
+  const id = recipe.id;
+  const router = useRouter();
   const [formData, setFormData] = useState({
     id: id,
-    title: "",
-    description: "",
-    ingredients: "",
-    instructions: "",
-    creation_date: "",
-    image_url: "",
-    chef: "",
+    title: recipe.title,
+    description: recipe.description,
+    ingredients: recipe.ingredients,
+    instructions: recipe.instructions,
+    creation_date: recipe.creation_date,
+    image_url: recipe.image_url ? recipe.image_url : "",
+    chef: recipe.chef,
   });
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -24,7 +25,6 @@ const dt_recipe = ({ params }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitting form data:", formData);
-    // const token = localStorage.getItem("token");
     const token =
       typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
@@ -44,69 +44,15 @@ const dt_recipe = ({ params }) => {
         throw new Error("Failed to update recipe");
       }
       alert("Recipe updated successfully");
+      router.push("/my_recipe");
     } catch (error) {
       console.error("An error occurred:", error);
-      // Log the response data if available
       if (error.response) {
         console.error("Response data:", await error.response.json());
       }
       alert("Failed to update recipe");
     }
   };
-
-  useEffect(() => {
-    setLoading(true);
-    const fetchRecipe = async () => {
-      if (id) {
-        try {
-          // const token = localStorage.getItem("token");
-          const token =
-            typeof window !== "undefined"
-              ? localStorage.getItem("token")
-              : null;
-          const response = await fetch(
-            `https://chefhub-backend.onrender.com/recipe/recipes/${id}`,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${token}`,
-              },
-            }
-          );
-          if (response.ok) {
-            const data = await response.json();
-            setRecipe(data);
-            setFormData({
-              id: data.id,
-              title: data.title,
-              description: data.description,
-              ingredients: data.ingredients,
-              instructions: data.instructions,
-              creation_date: data.creation_date,
-              image_url: data.image_url,
-              chef: data.chef,
-            });
-          } else {
-            console.error("Failed to fetch recipe");
-          }
-        } catch (error) {
-          console.error("An error occurred:", error);
-        } finally {
-          setLoading(false);
-        }
-      }
-    };
-
-    fetchRecipe();
-  }, [id]);
-
-  // if (!id || loading) {
-  //   return <div>Loading...</div>;
-  // }
-  // if (!recipe) {
-  //   return <div>Recipe not found</div>;
-  // }
-
   return (
     <div>
       <h2 className="text-center mt-5 text-[20px] mb-5">Edit Recipe</h2>
@@ -185,4 +131,4 @@ const dt_recipe = ({ params }) => {
   );
 };
 
-export default dt_recipe;
+export default EditRecipe;
