@@ -25,7 +25,8 @@ const dt_recipe = ({ params }) => {
     e.preventDefault();
     console.log("Submitting form data:", formData);
     // const token = localStorage.getItem("token");
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
     try {
       const response = await fetch(
@@ -59,7 +60,10 @@ const dt_recipe = ({ params }) => {
       if (id) {
         try {
           // const token = localStorage.getItem("token");
-          const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+          const token =
+            typeof window !== "undefined"
+              ? localStorage.getItem("token")
+              : null;
           const response = await fetch(
             `https://chefhub-backend.onrender.com/recipe/recipes/${id}`,
             {
@@ -96,15 +100,12 @@ const dt_recipe = ({ params }) => {
     fetchRecipe();
   }, [id]);
 
-  if (!id) {
-    return <div>Loading...</div>; 
-  }
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (!recipe) {
-    return <div>Recipe not found</div>;
-  }
+  // if (!id || loading) {
+  //   return <div>Loading...</div>;
+  // }
+  // if (!recipe) {
+  //   return <div>Recipe not found</div>;
+  // }
 
   return (
     <div>
