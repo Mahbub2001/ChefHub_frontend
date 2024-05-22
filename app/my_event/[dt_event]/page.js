@@ -16,43 +16,6 @@ const dt_event = ({ params }) => {
     organizer: "",
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("Submitting form data:", formData);
-    // const token = localStorage.getItem("token");
-    const token =
-      typeof window !== "undefined" ? localStorage.getItem("token") : null;
-
-    try {
-      const response = await fetch(
-        `https://chefhub-backend.onrender.com/event/events/${id}/`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${token}`,
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Failed to update event");
-      }
-      alert("Event updated successfully");
-    } catch (error) {
-      console.error("An error occurred:", error);
-      // Log the response data if available
-      if (error.response) {
-        console.error("Response data:", await error.response.json());
-      }
-      alert("Failed to update event");
-    }
-  };
-
   useEffect(() => {
     setLoading(true);
     const fetchEvent = async () => {
@@ -98,8 +61,44 @@ const dt_event = ({ params }) => {
     fetchEvent();
   }, [id]);
 
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Submitting form data:", formData);
+    // const token = localStorage.getItem("token");
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
+    try {
+      const response = await fetch(
+        `https://chefhub-backend.onrender.com/event/events/${id}/`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update event");
+      }
+      alert("Event updated successfully");
+    } catch (error) {
+      console.error("An error occurred:", error);
+      if (error.response) {
+        console.error("Response data:", await error.response.json());
+      }
+      alert("Failed to update event");
+    }
+  };
+
   if (!id) {
-    return <div>Loading...</div>; // You might want to replace this with a loading spinner
+    return <div>Loading...</div>; 
   }
   if (loading) {
     return <div>Loading...</div>;
