@@ -11,8 +11,11 @@ const My_Recipe = () => {
 
   useEffect(() => {
     const fetchUserEvents = async () => {
-      const storedUser = localStorage.getItem("user_id");
-      const token = localStorage.getItem("token");
+      const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+      const storedUser = typeof window !== 'undefined' ? localStorage.getItem('user_id') : null;
+
+      // const storedUser = localStorage.getItem("user_id");
+      // const token = localStorage.getItem("token");
       if (user) {
         try {
           const response = await fetch(
@@ -58,7 +61,9 @@ const My_Recipe = () => {
   };
 
   const handleDelete = async (eventId) => {
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+
     try {
       const response = await fetch(
         `https://chefhub-backend.onrender.com/event/events/${eventId}/`,

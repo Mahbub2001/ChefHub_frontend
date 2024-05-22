@@ -22,7 +22,9 @@ const EditEvent = ({ params }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitting form data:", formData);
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+
     try {
       const response = await fetch(`https://chefhub-backend.onrender.com/event/events/${id}/`, {
         method: "PUT",
@@ -51,7 +53,9 @@ const EditEvent = ({ params }) => {
     const fetchEvent = async () => {
       if (id) {
         try {
-          const token = localStorage.getItem("token");
+          // const token = localStorage.getItem("token");
+          const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+
           const response = await fetch(`https://chefhub-backend.onrender.com/event/events/${id}`, {
             headers: {
               "Content-Type": "application/json",

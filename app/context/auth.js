@@ -10,8 +10,12 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   // const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const storedUser = localStorage.getItem("user_id");
-    const storedUser_token = localStorage.getItem("token");
+    // const storedUser = localStorage.getItem("user_id");
+    // const storedUser_token = localStorage.getItem("token");
+    const storedUser_token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const storedUser = typeof window !== 'undefined' ? localStorage.getItem('user_id') : null;
+
+    
     if (storedUser && storedUser_token) {
       try {
         const parsedUser = JSON.parse(storedUser);

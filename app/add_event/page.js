@@ -3,8 +3,11 @@
 import React, { useState, useEffect } from "react";
 
 const AddEvent = () => {
-  const token = localStorage.getItem("token");
-  const user = localStorage.getItem("user_id");
+  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  const user = typeof window !== 'undefined' ? localStorage.getItem('user_id') : null;
+
+  // const token = localStorage.getItem("token");
+  // const user = localStorage.getItem("user_id");
   const [formData, setFormData] = useState({
     event_name: "",
     description: "",

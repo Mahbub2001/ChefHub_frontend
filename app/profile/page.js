@@ -17,10 +17,11 @@ const ProfilePage = () => {
     home: "",
     gender: "",
   });
-  const storedUser = localStorage.getItem("user_id");
+  const storedUser = typeof window !== 'undefined' ? localStorage.getItem('user_id') : null;
 
   useEffect(() => {
     const fetchProfileData = async () => {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
       if (user) {
         try {
           const response = await fetch(
@@ -29,7 +30,7 @@ const ProfilePage = () => {
               method: "GET",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${token}`,
               },
             }
           );
@@ -63,6 +64,11 @@ const ProfilePage = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    if (typeof window === 'undefined') {
+      return;
+    }
+    
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     try {
       const response = await fetch(
         // `http://127.0.0.1:8000/chef/profile/${storedUser}/`,
@@ -71,7 +77,7 @@ const ProfilePage = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(formData),
         }

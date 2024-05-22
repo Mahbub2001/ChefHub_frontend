@@ -23,7 +23,9 @@ const EditRecipe = ({ params }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitting form data:", formData);
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+
     try {
       const response = await fetch(
         `https://chefhub-backend.onrender.com/recipe/recipes/${id}/`,
@@ -55,7 +57,8 @@ const EditRecipe = ({ params }) => {
     const fetchRecipe = async () => {
       if (id) {
         try {
-          const token = localStorage.getItem("token");
+          // const token = localStorage.getItem("token");
+          const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
           const response = await fetch(
             `https://chefhub-backend.onrender.com/recipe/recipes/${id}`,
             {
