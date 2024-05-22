@@ -1,65 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-const dt_event = ({ params }) => {
-  const { dt_event } = params;
-  const id = dt_event;
-  const [event, setEvent] = useState(null);
+const EditEvent = ({ searchParams }) => {
+  const router = useRouter();
+  const event = JSON.parse(searchParams.event);
+  const id = event.id;
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     id: id,
-    event_name: "",
-    description: "",
-    date: "",
-    location: "",
-    organizer: "",
+    event_name: event.event_name,
+    description: event.description,
+    date: event.date,
+    location: event.location,
+    organizer: event.organizer,
   });
-
-  useEffect(() => {
-    setLoading(true);
-    const fetchEvent = async () => {
-      if (id) {
-        try {
-          // const token = localStorage.getItem("token");
-          const token =
-            typeof window !== "undefined"
-              ? localStorage.getItem("token")
-              : null;
-
-          const response = await fetch(
-            `https://chefhub-backend.onrender.com/event/events/${id}`,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${token}`,
-              },
-            }
-          );
-          if (response.ok) {
-            const data = await response.json();
-            setEvent(data);
-            setFormData({
-              id: data.id,
-              event_name: data.event_name,
-              description: data.description,
-              date: data.date,
-              location: data.location,
-              organizer: data.organizer,
-            });
-          } else {
-            console.error("Failed to fetch event");
-          }
-        } catch (error) {
-          console.error("An error occurred:", error);
-        } finally {
-          setLoading(false);
-        }
-      }
-    };
-
-    fetchEvent();
-  }, [id]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -88,6 +44,7 @@ const dt_event = ({ params }) => {
         throw new Error("Failed to update event");
       }
       alert("Event updated successfully");
+      router.push("/my_event");
     } catch (error) {
       console.error("An error occurred:", error);
       if (error.response) {
@@ -96,16 +53,6 @@ const dt_event = ({ params }) => {
       alert("Failed to update event");
     }
   };
-
-  if (!id) {
-    return <div>Loading...</div>; 
-  }
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (!event) {
-    return <div>Event not found</div>;
-  }
 
   return (
     <div>
@@ -174,4 +121,4 @@ const dt_event = ({ params }) => {
   );
 };
 
-export default dt_event;
+export default EditEvent;
