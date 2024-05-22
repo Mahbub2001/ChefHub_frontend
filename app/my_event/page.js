@@ -94,7 +94,7 @@ const My_Recipe = () => {
               <p>Description : {event.description}</p>
               <p>Date : {event.date}</p>
               <p>Location : {event.location}</p>
-              <Link href={`/my_event/${recipe.id}`}>Edit</Link>
+              <Link href={`/my_event/${event.id}`}>Edit</Link>
               <button onClick={() => handleDelete(event.id)} className="ml-2">Delete</button>
             </div>
           ))}
