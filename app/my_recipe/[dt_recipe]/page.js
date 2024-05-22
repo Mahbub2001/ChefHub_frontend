@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-const EditRecipe = ({ params }) => {
-  const { id } = params;
+const dt_recipe = ({ params }) => {
+  const { dt_recipe } = params;
+  const id = dt_recipe;
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
@@ -183,4 +184,4 @@ const EditRecipe = ({ params }) => {
   );
 };
 
-export default EditRecipe;
+export default dt_recipe;

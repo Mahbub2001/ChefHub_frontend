@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-const EditEvent = ({ params }) => {
-  const { id } = params;
+const dt_event = ({ params }) => {
+  const { dt_event } = params;
+  const id = dt_event;
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
@@ -23,17 +24,21 @@ const EditEvent = ({ params }) => {
     e.preventDefault();
     console.log("Submitting form data:", formData);
     // const token = localStorage.getItem("token");
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
     try {
-      const response = await fetch(`https://chefhub-backend.onrender.com/event/events/${id}/`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `https://chefhub-backend.onrender.com/event/events/${id}/`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to update event");
       }
@@ -54,14 +59,20 @@ const EditEvent = ({ params }) => {
       if (id) {
         try {
           // const token = localStorage.getItem("token");
-          const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+          const token =
+            typeof window !== "undefined"
+              ? localStorage.getItem("token")
+              : null;
 
-          const response = await fetch(`https://chefhub-backend.onrender.com/event/events/${id}`, {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Token ${token}`,
-            },
-          });
+          const response = await fetch(
+            `https://chefhub-backend.onrender.com/event/events/${id}`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Token ${token}`,
+              },
+            }
+          );
           if (response.ok) {
             const data = await response.json();
             setEvent(data);
@@ -164,4 +175,4 @@ const EditEvent = ({ params }) => {
   );
 };
 
-export default EditEvent;
+export default dt_event;

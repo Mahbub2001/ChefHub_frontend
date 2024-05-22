@@ -56,10 +56,6 @@ const My_Recipe = () => {
     return <div>You need to log in to view this page.</div>;
   }
 
-  const handleEdit = (eventId) => {
-    window.location.href = `/edit_event/${eventId}`;
-  };
-
   const handleDelete = async (eventId) => {
     // const token = localStorage.getItem("token");
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
@@ -98,8 +94,7 @@ const My_Recipe = () => {
               <p>Description : {event.description}</p>
               <p>Date : {event.date}</p>
               <p>Location : {event.location}</p>
-              {/* <button onClick={() => handleEdit(event.id)}>Edit</button> */}
-              <Link href={`/edit_event/${event.id}`}>Edit</Link>
+              <Link href={`/my_event/${recipe.id}`}>Edit</Link>
               <button onClick={() => handleDelete(event.id)} className="ml-2">Delete</button>
             </div>
           ))}
