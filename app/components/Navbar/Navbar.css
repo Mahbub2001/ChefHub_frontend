@@ -1,0 +1,147 @@
+.Navbar {
+  background: rgb(5, 47, 44);
+  /* background: #252423; */
+  padding: 20px;
+  z-index: 10000;
+  padding: 0px 25px;
+  height: 125px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.Navbar > .nav-items > a,
+button {
+  z-index: 10000;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 10px;
+  padding: 10px 0;
+  position: relative;
+  opacity: 0.9;
+}
+.school-name {
+  font-size: 20px !important;
+}
+
+.Navbar > .nav-items > a:hover,
+.Navbar > .nav-items > button:hover {
+  color: #cc6c06;
+}
+.Navbar > .nav-items > a:hover,
+.Navbar > .nav-items > button:hover {
+  opacity: 1;
+}
+.Navbar > .nav-items > a::before,
+.Navbar > .nav-items > button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: #cc6c06;
+  transition: all 0.45s;
+}
+
+.Navbar > .nav-items > a:hover::before,
+.Navbar > .nav-items > button:hover::before {
+  width: 100%;
+}
+
+.Navbar > .nav-toggle {
+  display: none;
+}
+
+@media (max-width: 1115px) {
+  .school-name {
+    font-size: 14px !important;
+  }
+  .Navbar > .nav-items {
+    z-index: 10000;
+    position: absolute;
+    top: 125px;
+    display: flex;
+    padding-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    background: #252423;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    transition: all 0.45s;
+  }
+  .Navbar > .nav-items > a,
+  .Navbar > .nav-items > button {
+    margin: 5px;
+    font-size: 20px;
+  }
+  .Navbar > .nav-items > a::before,
+  .Navbar > .nav-items > button::before {
+    background-color: transparent;
+  }
+  .Navbar > .nav-items.open {
+    transform: translateX(0);
+  }
+  .Navbar > .nav-toggle {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .nav-toggle > .bar {
+    position: relative;
+    width: 32px;
+    height: 2px;
+    background: white;
+    transition: all 0.45s ease-in-out;
+  }
+  .nav-toggle > .bar::before,
+  .nav-toggle > .bar::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background-color: white;
+    border-radius: 2px;
+    transition: all 0.45s ease-in-out;
+  }
+  .nav-toggle > .bar::before {
+    width: 25px;
+    transform: translateY(-8px);
+    right: 0;
+  }
+  .nav-toggle > .bar::after {
+    width: 32px;
+    transform: translateY(8px);
+  }
+  .nav-toggle.open > .bar {
+    transform: translateX(-40px);
+    background: transparent;
+  }
+  .nav-toggle.open > .bar::before {
+    width: 32px;
+    transform: rotate(45deg) translate(26px, -26px);
+  }
+  .nav-toggle.open > .bar::after {
+    transform: rotate(-45deg) translate(26px, 26px);
+  }
+}
+@media (max-width: 1500px) {
+  .school-name {
+    font-size: 14px !important;
+  }
+  .Navbar > .nav-items > a,
+  button {
+    z-index: 10000;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 5px;
+    padding: 10px 0;
+    position: relative;
+    opacity: 0.9;
+  }
+}
