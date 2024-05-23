@@ -3,6 +3,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth";
 import Link from "next/link";
+import withProtectedRoute from "../components/Wrapper/protectedroute";
 
 const My_Event = () => {
   const { user } = useContext(AuthContext);
@@ -113,4 +114,4 @@ const My_Event = () => {
   );
 };
 
-export default My_Event;
+export default withProtectedRoute(My_Event);

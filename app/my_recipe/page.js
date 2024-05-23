@@ -3,6 +3,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth";
 import Link from "next/link";
+import withProtectedRoute from "../components/Wrapper/protectedroute";
 
 const My_Recipe = () => {
   const { user } = useContext(AuthContext);
@@ -120,4 +121,4 @@ const My_Recipe = () => {
   );
 };
 
-export default My_Recipe;
+export default withProtectedRoute(My_Recipe);

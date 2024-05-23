@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import withProtectedRoute from "../components/Wrapper/protectedroute";
 
 const AddRecipe = () => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
@@ -139,4 +140,4 @@ const AddRecipe = () => {
   );
 };
 
-export default AddRecipe;
+export default withProtectedRoute(AddRecipe);

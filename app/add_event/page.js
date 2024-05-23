@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import withProtectedRoute from "../components/Wrapper/protectedroute";
 
 const AddEvent = () => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
@@ -133,4 +134,4 @@ const AddEvent = () => {
   );
 };
 
-export default AddEvent;
+export default withProtectedRoute(AddEvent);
