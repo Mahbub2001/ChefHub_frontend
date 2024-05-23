@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/app/context/auth";
@@ -5,7 +7,7 @@ import { AuthContext } from "@/app/context/auth";
 const withProtectedRoute = (WrappedComponent) => {
   return (props) => {
     // const { user } = useContext(AuthContext);
-    const user = localStorage.getItem("user_id");
+    const user = typeof window !== 'undefined' ? localStorage.getItem('user_id') : null;
     const [isLoading, setIsLoading] = useState(true);
     const router = useRouter();
 
