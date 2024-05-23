@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, createContext } from "react";
 import { useRouter } from "next/navigation";
+import toast, { Toaster } from 'react-hot-toast';
 
 export const AuthContext = createContext();
 
@@ -29,27 +30,37 @@ const AuthProvider = ({ children }) => {
   
 
   const signin = async (email, password) => {
-    const res = await fetch(
-      "https://chefhub-backend.onrender.com/chef/login/",
-      {
+    let data;
+    try {
+      const res = await fetch("https://chefhub-backend.onrender.com/chef/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+      });
+
+      if (res.ok) {
+        console.log(res);
+        data = await res.json();
+        if(data.error){
+           toast.error(data.error);
+           return;
+        }
+        // console.log(data);
+        toast.success("Successfully login!")
+        setUser(data.user_id);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user_id", data.user_id);
+        router.push("/profile", { scroll: false });
+        return { success: true };
+      } else {
+        const errorData = await res.json();
+        return { success: false, error: errorData.error || "Login failed" };
       }
-    );
-
-    if (res.ok) {
-      const data = await res.json();
-      console.log(data);
-      setUser(data.user_id);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user_id", data.user_id);
-      router.push("/profile", { scroll: false });
+    } catch (error) {
+      return { success: false, error: "Network error. Please try again." };
     }
-
-    return res;
   };
 
   const logout = async () => {

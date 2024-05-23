@@ -4,6 +4,7 @@ import "./globals.css";
 import AuthProvider from "./context/auth";
 import Navbar from "./components/Navbar/Navbar";
 const inter = Inter({ subsets: ["latin"] });
+import { Toaster } from "react-hot-toast"
 
 export const metadata = {
   title: "ChefHub",
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <body className={inter.className}>
           <Navbar />
           {children}
+          <Toaster />
         </body>
       </html>
     </AuthProvider>

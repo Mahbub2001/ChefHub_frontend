@@ -2,6 +2,8 @@
 
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/auth";
+import toast, { Toaster } from 'react-hot-toast';
+
 const LoginPage = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -21,16 +23,16 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await signin(formData.email, formData.password);
-  
-      if (!response.ok) {
-        const errorData = await response.json();
-        setError(errorData.error || "Login failed");
-        return;
+      if (!response.success) {
+        setError(response.error);
+        toast.error(response.error);
+      } else {
+        // toast.success("Successfully Login!");
       }
-      console.log("Login successful!");
     } catch (error) {
-      setError("An error occurred during login. Please try again.");
-      console.error("An error occurred:", error);
+      // setError("An error occurred during login. Please try again.");
+      // toast.error("An error occurred during login. Please try again.");
+      // console.error("An error occurred:", error);
     }
   };
   
