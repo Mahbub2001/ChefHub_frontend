@@ -3,6 +3,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth";
 import Image from "next/image";
+import withProtectedRoute from "../components/Wrapper/protectedroute";
 
 const ProfilePage = () => {
   const { user } = useContext(AuthContext);
@@ -238,4 +239,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default withProtectedRoute(ProfilePage);
