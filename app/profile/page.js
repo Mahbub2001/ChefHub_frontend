@@ -2,6 +2,7 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth";
+import Image from "next/image";
 
 const ProfilePage = () => {
   const { user } = useContext(AuthContext);
@@ -17,11 +18,13 @@ const ProfilePage = () => {
     home: "",
     gender: "",
   });
-  const storedUser = typeof window !== 'undefined' ? localStorage.getItem('user_id') : null;
+  const storedUser =
+    typeof window !== "undefined" ? localStorage.getItem("user_id") : null;
 
   useEffect(() => {
     const fetchProfileData = async () => {
-      const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+      const token =
+        typeof window !== "undefined" ? localStorage.getItem("token") : null;
       if (user) {
         try {
           const response = await fetch(
@@ -64,11 +67,12 @@ const ProfilePage = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return;
     }
-    
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
     try {
       const response = await fetch(
         // `http://127.0.0.1:8000/chef/profile/${storedUser}/`,
@@ -106,7 +110,7 @@ const ProfilePage = () => {
 
   return (
     <div>
-      <h2 className="text-center mt-5 text-[20px] mb-5">User Profile</h2>
+      <h2 className="text-center mt-5 text-[20px] mb-5">Welcome {formData.username}</h2>
       {profileData ? (
         <div>
           {editMode ? (
@@ -194,29 +198,36 @@ const ProfilePage = () => {
               <button type="submit">Save Changes</button>
             </form>
           ) : (
-            <div>
-              <p>
-                <strong>Username:</strong> {profileData.username}
-              </p>
-              <p>
-                <strong>Email:</strong> {profileData.email}
-              </p>
-              <p>
-                <strong>Bio:</strong> {profileData.bio}
-              </p>
-              <p>
-                <strong>Profile Picture:</strong> {profileData.profile_picture}
-              </p>
-              <p>
-                <strong>Phone Number:</strong> {profileData.phone_number}
-              </p>
-              <p>
-                <strong>Home:</strong> {profileData.home}
-              </p>
-              <p>
-                <strong>Gender:</strong> {profileData.gender}
-              </p>
-              <button onClick={() => setEditMode(true)}>Edit Profile</button>
+            <div className="flex justify-center items-center gap-5">
+              <div>
+                <Image
+                  src={formData.profile_picture}
+                  width={500}
+                  height={500}
+                  alt="Picture of the author"
+                />
+              </div>
+              <div>
+                <p>
+                  <strong>Username:</strong> {profileData.username}
+                </p>
+                <p>
+                  <strong>Email:</strong> {profileData.email}
+                </p>
+                <p>
+                  <strong>Bio:</strong> {profileData.bio}
+                </p>
+                <p>
+                  <strong>Phone Number:</strong> {profileData.phone_number}
+                </p>
+                <p>
+                  <strong>Home:</strong> {profileData.home}
+                </p>
+                <p>
+                  <strong>Gender:</strong> {profileData.gender}
+                </p>
+                <button onClick={() => setEditMode(true)}>Edit Profile</button>
+              </div>
             </div>
           )}
         </div>
