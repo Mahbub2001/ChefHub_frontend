@@ -73,7 +73,7 @@ const AddRecipe = () => {
         throw new Error("Failed to add recipe");
       }
 
-      toast.success("Successfully login!");
+      toast.success("Successfully added!");
       setFormData({
         title: "",
         description: "",
