@@ -55,69 +55,72 @@ const EditEvent = ({ searchParams }) => {
   };
 
   return (
-    <div>
-      <h2 className="text-center mt-5 text-[20px] mb-5">Edit Event</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="event_name" className="form-label">
-            Event Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="event_name"
-            name="event_name"
-            value={formData.event_name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="description" className="form-label">
-            Description
-          </label>
-          <textarea
-            className="form-control"
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            required
-          ></textarea>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="location" className="form-label">
-            Location
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="location"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="date" className="form-label">
-            Date and Time
-          </label>
-          <input
-            type="datetime-local"
-            className="form-control"
-            id="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Update Event
-        </button>
-      </form>
-    </div>
+    <div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-lg mt-5">
+    <h2 className="text-center text-2xl font-semibold mb-5">Edit Event</h2>
+    <form onSubmit={handleSubmit}>
+      <div className="mb-4">
+        <label htmlFor="event_name" className="block text-gray-700 font-medium mb-2">
+          Event Name
+        </label>
+        <input
+          type="text"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          id="event_name"
+          name="event_name"
+          value={formData.event_name}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="description" className="block text-gray-700 font-medium mb-2">
+          Description
+        </label>
+        <textarea
+          className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          id="description"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          required
+        ></textarea>
+      </div>
+      <div className="mb-4">
+        <label htmlFor="location" className="block text-gray-700 font-medium mb-2">
+          Location
+        </label>
+        <input
+          type="text"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          id="location"
+          name="location"
+          value={formData.location}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="date" className="block text-gray-700 font-medium mb-2">
+          Date and Time
+        </label>
+        <input
+          type="datetime-local"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          id="date"
+          name="date"
+          value={formData.date}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        className="w-full py-2 bg-blue-500 text-white font-semibold rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        Update Event
+      </button>
+    </form>
+  </div>
   );
 };
 

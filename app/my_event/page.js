@@ -85,32 +85,39 @@ const My_Event = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-center mt-5 text-[20px] mb-5">My Events</h2>
-      {events.length > 0 ? (
-        <div>
-          {events.map((event) => (
-            <div key={event.id} className="mb-5">
-              <h3>Event Name: {event.event_name}</h3>
-              <p>Description : {event.description}</p>
-              <p>Date : {event.date}</p>
-              <p>Location : {event.location}</p>
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mt-5">
+    <h2 className="text-center text-2xl font-semibold mb-5">My Events</h2>
+    {events.length > 0 ? (
+      <div className="space-y-5">
+        {events.map((event) => (
+          <div key={event.id} className="p-5 border border-gray-300 rounded-lg shadow-sm">
+            <h3 className="text-xl font-medium mb-2">Event Name: {event.event_name}</h3>
+            <p className="text-gray-700 mb-1"><strong>Description:</strong> {event.description}</p>
+            <p className="text-gray-700 mb-1"><strong>Date:</strong> {event.date}</p>
+            <p className="text-gray-700 mb-3"><strong>Location:</strong> {event.location}</p>
+            <div className="flex space-x-4">
               <Link
                 href={{
                   pathname: "/edit_event",
                   query: { event: JSON.stringify(event) },
                 }}
               >
-                Edit
+                <p className="text-blue-500 hover:underline">Edit</p>
               </Link>
-              <button onClick={() => handleDelete(event.id)} className="ml-2">Delete</button>
+              <button
+                onClick={() => handleDelete(event.id)}
+                className="text-red-500 hover:underline"
+              >
+                Delete
+              </button>
             </div>
-          ))}
-        </div>
-      ) : (
-        <div>No events found.</div>
-      )}
-    </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div className="text-center text-gray-700">No events found.</div>
+    )}
+  </div>
   );
 };
 
