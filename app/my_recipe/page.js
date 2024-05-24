@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth";
 import Link from "next/link";
 import withProtectedRoute from "../components/Wrapper/protectedroute";
+import Image from "next/image";
 
 const My_Recipe = () => {
   const { user } = useContext(AuthContext);
@@ -16,9 +17,7 @@ const My_Recipe = () => {
         typeof window !== "undefined" ? localStorage.getItem("token") : null;
       const storedUser =
         typeof window !== "undefined" ? localStorage.getItem("user_id") : null;
-
-      // const storedUser = localStorage.getItem("user_id");
-      // const token = localStorage.getItem("token");
+        
       if (user) {
         try {
           const response = await fetch(
@@ -62,8 +61,6 @@ const My_Recipe = () => {
   const handleDelete = async (recipeId) => {
     const token =
       typeof window !== "undefined" ? localStorage.getItem("token") : null;
-
-    // const token = localStorage.getItem("token");
     try {
       const response = await fetch(
         `https://chefhub-backend.onrender.com/recipe/recipes/${recipeId}/`,
@@ -90,32 +87,51 @@ const My_Recipe = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-center mt-5 text-[20px] mb-5">My Recipes</h2>
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mt-5">
+      <h2 className="text-center text-2xl font-semibold mb-5">My Recipes</h2>
       {recipes.length > 0 ? (
-        <div>
+        <div className="grid gap-5">
           {recipes.map((recipe) => (
-            <div key={recipe.id} className="mb-5">
-              <h3>Title: {recipe.title}</h3>
-              <p>Description : {recipe.description}</p>
-              <p>Ingredients : {recipe.ingredients}</p>
-              <p>Instructions: {recipe.instructions}</p>
-              <Link
-                href={{
-                  pathname: "/edit_recipe",
-                  query: { recipe: JSON.stringify(recipe) },
-                }}
-              >
-                Edit
-              </Link>
-              <button onClick={() => handleDelete(recipe.id)} className="ml-2">
-                Delete
-              </button>
+            <div
+              key={recipe.id}
+              className="p-4 border border-gray-200 rounded-lg shadow-md"
+            >
+              <h3 className="text-xl font-bold mb-2">Title: {recipe.title}</h3>
+              {recipe.image_url ? (
+                <Image
+                  src={recipe.image_url}
+                  width={200}
+                  height={200}
+                  alt={`Image of ${recipe.title}`}
+                  className="rounded-lg mb-2"
+                />
+              ) : (
+                <p className="text-gray-500">No image available</p>
+              )}
+              <p className="text-gray-700 mb-1"><strong>Description:</strong> {recipe.description}</p>
+              <p className="text-gray-700 mb-1"><strong>Ingredients:</strong> {recipe.ingredients}</p>
+              <p className="text-gray-700 mb-1"><strong>Instructions:</strong> {recipe.instructions}</p>
+              <div className="flex items-center justify-between mt-4">
+                <Link
+                  href={{
+                    pathname: "/edit_recipe",
+                    query: { recipe: JSON.stringify(recipe) },
+                  }}
+                >
+                  <p className="text-blue-500 hover:underline">Edit</p>
+                </Link>
+                <button
+                  onClick={() => handleDelete(recipe.id)}
+                  className="ml-2 bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>
       ) : (
-        <div>No recipes found.</div>
+        <div className="text-center text-gray-500">No recipes found.</div>
       )}
     </div>
   );

@@ -54,16 +54,16 @@ const EditRecipe = ({ searchParams }) => {
     }
   };
   return (
-    <div>
-      <h2 className="text-center mt-5 text-[20px] mb-5">Edit Recipe</h2>
+<div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-lg mt-5">
+      <h2 className="text-center text-2xl font-semibold mb-5">Edit Recipe</h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="title" className="form-label">
+        <div className="mb-4">
+          <label htmlFor="title" className="block text-gray-700 font-medium mb-2">
             Title
           </label>
           <input
             type="text"
-            className="form-control"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             id="title"
             name="title"
             value={formData.title}
@@ -71,12 +71,15 @@ const EditRecipe = ({ searchParams }) => {
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="description" className="form-label">
+        <div className="mb-4">
+          <label
+            htmlFor="description"
+            className="block text-gray-700 font-medium mb-2"
+          >
             Description
           </label>
           <textarea
-            className="form-control"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             id="description"
             name="description"
             value={formData.description}
@@ -84,12 +87,15 @@ const EditRecipe = ({ searchParams }) => {
             required
           ></textarea>
         </div>
-        <div className="mb-3">
-          <label htmlFor="ingredients" className="form-label">
+        <div className="mb-4">
+          <label
+            htmlFor="ingredients"
+            className="block text-gray-700 font-medium mb-2"
+          >
             Ingredients
           </label>
           <textarea
-            className="form-control"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             id="ingredients"
             name="ingredients"
             value={formData.ingredients}
@@ -97,12 +103,15 @@ const EditRecipe = ({ searchParams }) => {
             required
           ></textarea>
         </div>
-        <div className="mb-3">
-          <label htmlFor="instructions" className="form-label">
+        <div className="mb-4">
+          <label
+            htmlFor="instructions"
+            className="block text-gray-700 font-medium mb-2"
+          >
             Instructions
           </label>
           <textarea
-            className="form-control"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             id="instructions"
             name="instructions"
             value={formData.instructions}
@@ -110,20 +119,26 @@ const EditRecipe = ({ searchParams }) => {
             required
           ></textarea>
         </div>
-        <div className="mb-3">
-          <label htmlFor="image_url" className="form-label">
+        <div className="mb-4">
+          <label
+            htmlFor="image_url"
+            className="block text-gray-700 font-medium mb-2"
+          >
             Image URL
           </label>
           <input
             type="text"
-            className="form-control"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             id="image_url"
             name="image_url"
             value={formData.image_url}
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="w-full py-2 bg-blue-500 text-white font-semibold rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
           Update Recipe
         </button>
       </form>
